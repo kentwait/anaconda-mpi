@@ -2,7 +2,8 @@ FROM kentwait/docker-openmpi
 MAINTAINER Kent Kawashima <kentkawashima@gmail.com>
 
 # Install utilities
-RUN apt-get install -y wget bzip2 ca-certificates libglib2.0-0 libxext6 \
+RUN apt-get install -y wget bzip2 gfortran \
+	ca-certificates libglib2.0-0 libxext6 \
 	libsm6 libxrender1 git mercurial subversion \
 	curl grep sed dpkg
 
@@ -19,9 +20,22 @@ ENV PATH /opt/conda/bin:$PATH
 ENV LANG C.UTF-8
 
 # Install Python3 packages
-conda install networkx
-conda install seaborn
-pip install simpy
-pip install mpi4py
+RUN conda install networkx seaborn
+RUN pip install simpy mpi4py
 
-CMD [ "/bin/bash" ]
+# Create "docker" user
+RUN useradd --create-home --home-dir /home/docker --shell /bin/bash docker
+RUN usermod -a -G sudo docker
+RUN echo "docker ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+# Allow notebook to communicate with outside world
+EXPOSE 8888
+USER docker
+RUN mkdir -p /home/docker/notebooks
+ENV HOME=/home/docker
+ENV SHELL=/bin/bash
+ENV USER=docker
+VOLUME /home/docker/notebooks
+WORKDIR /home/docker/notebooks
+
+CMD /opt/conda/bin/jupyter notebook
