@@ -2,10 +2,8 @@ FROM kentwait/docker-openmpi
 MAINTAINER Kent Kawashima <kentkawashima@gmail.com>
 
 # Install utilities
-RUN apt-get install -y wget bzip2 gfortran \
-	ca-certificates libglib2.0-0 libxext6 \
-	libsm6 libxrender1 git mercurial subversion \
-	curl grep sed dpkg
+RUN apt-get install -y ca-certificates libglib2.0-0 libxext6 \
+	libsm6 libxrender1 git mercurial subversion
 
 # Install anaconda 
 RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
