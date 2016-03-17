@@ -2,8 +2,14 @@ FROM kentwait/docker-openmpi
 MAINTAINER Kent Kawashima <kentkawashima@gmail.com>
 
 # Install utilities
-RUN apt-get install -y ca-certificates libglib2.0-0 libxext6 \
-	libsm6 libxrender1 git mercurial subversion
+RUN apt-get install -q -y ca-certificates \
+                          libglib2.0-0 \
+                          libxext6 \
+	                      libsm6 \
+	                      libxrender1 \
+	                      git \
+	                      mercurial \
+	                      subversion
 
 # Install anaconda 
 RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
@@ -18,8 +24,10 @@ ENV PATH /opt/conda/bin:$PATH
 ENV LANG C.UTF-8
 
 # Install Python3 packages
-RUN conda install networkx seaborn
-RUN pip install simpy mpi4py
+RUN conda install -q -y networkx \
+                        seaborn
+RUN pip install -q simpy \
+                   mpi4py
 
 # Create "docker" user
 RUN useradd --create-home --home-dir /home/docker --shell /bin/bash docker
