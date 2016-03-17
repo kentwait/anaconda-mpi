@@ -1,7 +1,7 @@
 # anaconda-mpi
 
 Docker container for developing MPI applications in Python using Jupyter notebook.
-Includes a full installation of Anaconda 2.5.0 for Python 3.5 installation.
+Includes a full installation of Anaconda 2.5.0 for Python 3.5.
 
 ## Install
 
