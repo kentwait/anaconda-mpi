@@ -25,6 +25,7 @@ RUN pip install simpy mpi4py
 RUN useradd --create-home --home-dir /home/docker --shell /bin/bash docker
 RUN usermod -a -G sudo docker
 RUN echo "docker ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+RUN chown docker:docker /home/docker -R
 
 # Allow notebook to communicate with outside world
 EXPOSE 8888
@@ -36,4 +37,4 @@ ENV USER=docker
 VOLUME /home/docker/notebooks
 WORKDIR /home/docker/notebooks
 
-CMD /opt/conda/bin/jupyter notebook
+CMD /opt/conda/bin/jupyter-notebook --no-browser --port 8888 --ip=0.0.0.0
