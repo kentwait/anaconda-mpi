@@ -25,7 +25,6 @@ RUN pip install simpy mpi4py
 RUN useradd --create-home --home-dir /home/docker --shell /bin/bash docker
 RUN usermod -a -G sudo docker
 RUN echo "docker ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-RUN chown docker:docker /home/docker -R
 
 # Allow notebook to communicate with outside world
 EXPOSE 8888
