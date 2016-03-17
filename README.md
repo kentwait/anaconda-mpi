@@ -1,13 +1,13 @@
 # anaconda-mpi
 
 Docker container for developing MPI applications in Python using Jupyter notebook.
-Includes the full Anaconda 2.5.0 for Python 3.5 installation.
+Includes a full installation of Anaconda 2.5.0 for Python 3.5 installation.
 
-Install
+## Install
 
 	docker pull kentwait/anaconda-mpi
 
-Uaage
+## Usage
 
 The following command runs the container which launches a Jupyter notebook running Python 3.5 and IPython 4.1.1.
 
