@@ -34,9 +34,9 @@ ENV LANG C.UTF-8
 # Install additional Python3 packages
 RUN conda install -q -y networkx \
                         seaborn
-RUN pip install -q simpy \ # simpy is not available in conda repo
-                   mpi4py  # MPI4py in conda is broken as of 2016/03/17
-
+# MPI4py in conda is broken as of 2016/03/17
+# simpy is not available in conda repo
+RUN pip install -q mpi4py simpy
 
 # Allow notebook to communicate with outside world
 EXPOSE 8888
