@@ -32,11 +32,14 @@ ENV PATH /home/docker/conda/bin:$PATH
 ENV LANG C.UTF-8
 
 # Install additional Python3 packages
-RUN conda install -q -y networkx \
-                        seaborn
+
 # MPI4py in conda is broken as of 2016/03/17
 # simpy is not available in conda repo
 RUN pip install -q mpi4py simpy
+RUN conda install -q -y networkx \
+                        seaborn \
+                        ipyparallel
+RUN cd /home/docker && ipcluster nbextension enable
 
 # Allow notebook to communicate with outside world
 EXPOSE 8888
